@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mustafai Estate</title>
+  <link rel="icon" type="image/x-icon" href="logo.jpg">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Admin Login Button -->
+<button id="adminBtn" onclick="toggleAdmin()">🔐 Admin Login</button>
+
+<!-- LOGIN MODAL -->
+<div id="loginModal">
+  <div id="loginBox">
+    <h3>Login if you're admin</h3>
+    <input type="password" id="adminPassword" placeholder="Enter admin password" autocomplete="off">
+    <br>
+    <button onclick="loginAdmin()">Login</button>
+    <button onclick="closeLogin()">Close</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-overlay">
+    <img src="logo.jpg" class="hero-logo" alt="Mustafai Estate Logo">
+    <h1>Your Trusted Real Estate Partner</h1>
+    <p>Expert property consultancy and investment solutions in Lahore.</p>
+    <a href="#contact" class="hero-btn">Contact Us</a>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section class="about">
+  <h2 class="section-title">About Us</h2>
+  <p>Mustafai Estate offers professional consultancy services for buying, selling, and investing in properties in Lahore. With extensive experience in residential and commercial property dealing, our mission is to provide reliable advice, transparent transactions, and profitable investment options for our valued clients.</p>
+</section>
+
+<!-- SERVICES -->
+<section>
+  <h2 class="section-title">Our Services</h2>
+  <div class="services">
+    <div class="service-card">
+      <h3>Property Buying</h3>
+      <p>Helping clients secure the best residential and commercial plots at competitive market rates.</p>
+    </div>
+    <div class="service-card">
+      <h3>Property Selling</h3>
+      <p>Quick, reliable selling services with maximum market exposure and professional support.</p>
+    </div>
+    <div class="service-card">
+      <h3>Investment Consultancy</h3>
+      <p>Advising on profitable property investments in Park View Villas and prime Lahore locations.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROPERTIES -->
+<section id="properties">
+  <h2 class="section-title">Properties</h2>
+  <div id="addPropertyForm">
+    <input type="hidden" id="editIndex" value="-1">
+    <input type="text" id="propertyTitle" placeholder="Property Title"><br>
+    <input type="text" id="propertyImage" placeholder="Image URL"><br>
+    <input type="text" id="propertyPrice" placeholder="Price in PKR"><br>
+    <textarea id="propertyDescription" placeholder="Description" rows="4"></textarea><br>
+    <button id="addUpdateBtn" onclick="submitProperty()">Add Property</button>
+    <button id="cancelEditBtn" onclick="cancelEdit()" style="display:none;">Cancel</button>
+  </div>
+  <div id="propertyContainer" class="property-list"></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2 class="section-title">Contact Us</h2>
+  <div class="contact-box">
+    <p><strong>📍 Address:</strong> 9 Jasmine Commercial Zone, Park View Villas, Lahore</p>
+    <p><strong>📧 Email:</strong> <a href="mailto:mustafaiestate@gmail.com">mustafaiestate@gmail.com</a></p>
+    <p><strong>Phone📞:</strong> 0333-4872838, 0333-4284823 </p>
+    <p><strong>Other📞:</strong> 0300-4929401, 0300-4217557</p>
+  </div>
+</section>
+
+<!-- SOCIAL LINKS -->
+<div class="social-container">
+  <a class="social-btn whatsapp" href="https://wa.me/923334284823" target="_blank">💬<span>WhatsApp</span></a>
+  <a class="social-btn facebook" href="https://www.facebook.com/share/16YKTNPs5S/" target="_blank">📘<span>Facebook</span></a>
+  <a class="social-btn instagram" href="https://www.instagram.com/mustafaiestate?igsh=MXFvMXpteTlwMDhu" target="_blank">📸<span>Instagram</span></a>
+</div>
+
+<!-- MAP -->
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13699.593628347108!2d74.24643787542257!3d31.429944966237604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39190120e8403763%3A0xc7d8014d94d05cc2!2sPark%20View%20Villas!5e0!3m2!1sen!2s!4v1683798373481!5m2!1sen!2s" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2025 Mustafai Estate
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
