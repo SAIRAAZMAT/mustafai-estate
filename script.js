@@ -1,3 +1,15 @@
+const firebaseConfig = {
+  apiKey: "AIzaSyA93wCNiPzp2c7_uS2omjDM3WJFDPlKKaQ",
+  authDomain: "mustafaiestate-2e9c7.firebaseapp.com",
+  databaseURL: "https://mustafaiestate-2e9c7-default-rtdb.firebaseio.com",
+  projectId: "mustafaiestate-2e9c7",
+  storageBucket: "mustafaiestate-2e9c7.firebasestorage.app",
+  messagingSenderId: "11456486940",
+  appId: "1:11456486940:web:bbb4293ab01351a60ec9d9"
+};
+
+const app = initializeApp(firebaseConfig);
+
 let isAdmin = false;
 
 function checkAdminStatus() {
