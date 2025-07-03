@@ -1,15 +1,3 @@
-const firebaseConfig = {
-  apiKey: "AIzaSyA93wCNiPzp2c7_uS2omjDM3WJFDPlKKaQ",
-  authDomain: "mustafaiestate-2e9c7.firebaseapp.com",
-  databaseURL: "https://mustafaiestate-2e9c7-default-rtdb.firebaseio.com",
-  projectId: "mustafaiestate-2e9c7",
-  storageBucket: "mustafaiestate-2e9c7.firebasestorage.app",
-  messagingSenderId: "11456486940",
-  appId: "1:11456486940:web:bbb4293ab01351a60ec9d9"
-};
-
-const app = initializeApp(firebaseConfig);
-
 let isAdmin = false;
 
 function checkAdminStatus() {
@@ -54,101 +42,98 @@ function loginAdmin() {
   }
 }
 
-function getProperties(callback) {
-  db.ref("properties").on("value", (snapshot) => {
-    const data = snapshot.val() || {};
-    const propsArray = Object.keys(data).map(key => ({ id: key, ...data[key] }));
-    callback(propsArray);
-  });
+function getProperties() {
+  const props = localStorage.getItem('properties');
+  return props ? JSON.parse(props) : [];
 }
 
-
-function saveProperty(prop, editId = null) {
-  if (editId) {
-    db.ref(`properties/${editId}`).set(prop);
-  } else {
-    db.ref("properties").push(prop);
-  }
+function saveProperties(props) {
+  localStorage.setItem('properties', JSON.stringify(props));
 }
-function deletePropertyFirebase(id) {
-  db.ref(`properties/${id}`).remove();
-}
-
 
 function renderProperties() {
   const container = document.getElementById('propertyContainer');
-  container.innerHTML = '<p style="color:#777;">Loading properties...</p>';
+  container.innerHTML = '';
+  const props = getProperties();
 
-  getProperties((props) => {
-    container.innerHTML = '';
-    if (props.length === 0) {
-      container.innerHTML = '<p style="color:#777; text-align:center;">No properties listed yet.</p>';
-      return;
+  if (props.length === 0) {
+    container.innerHTML = '<p style="color:#777; text-align:center;">No properties listed yet.</p>';
+    return;
+  }
+
+  props.forEach((prop, index) => {
+    const card = document.createElement('div');
+    card.className = 'property-card';
+
+    const img = document.createElement('img');
+    img.src = prop.image;
+    img.alt = prop.title;
+
+    const title = document.createElement('h4');
+    title.textContent = prop.title;
+
+    const price = document.createElement('p');
+    price.style.fontWeight = '700';
+    price.textContent = `Price: PKR ${prop.price}`;
+
+    const desc = document.createElement('p');
+    desc.textContent = prop.description;
+
+    card.appendChild(img);
+    card.appendChild(title);
+    card.appendChild(price);
+    card.appendChild(desc);
+
+    if (isAdmin) {
+      const editDeleteDiv = document.createElement('div');
+      editDeleteDiv.className = 'edit-delete';
+
+      const editBtn = document.createElement('button');
+      editBtn.className = 'edit-btn';
+      editBtn.title = 'Edit Property';
+      editBtn.innerHTML = '✏️';
+      editBtn.onclick = () => editProperty(index);
+
+      const delBtn = document.createElement('button');
+      delBtn.className = 'delete-btn';
+      delBtn.title = 'Delete Property';
+      delBtn.innerHTML = '🗑️';
+      delBtn.onclick = () => deleteProperty(index);
+
+      editDeleteDiv.appendChild(editBtn);
+      editDeleteDiv.appendChild(delBtn);
+      card.appendChild(editDeleteDiv);
     }
 
-    props.forEach((prop) => {
-      const card = document.createElement('div');
-      card.className = 'property-card';
-
-      const img = document.createElement('img');
-      img.src = prop.image;
-      img.alt = prop.title;
-
-      const title = document.createElement('h4');
-      title.textContent = prop.title;
-
-      const price = document.createElement('p');
-      price.style.fontWeight = '700';
-      price.textContent = `Price: PKR ${prop.price}`;
-
-      const desc = document.createElement('p');
-      desc.textContent = prop.description;
-
-      card.appendChild(img);
-      card.appendChild(title);
-      card.appendChild(price);
-      card.appendChild(desc);
-
-      if (isAdmin) {
-        const editDeleteDiv = document.createElement('div');
-        editDeleteDiv.className = 'edit-delete';
-
-        const delBtn = document.createElement('button');
-        delBtn.className = 'delete-btn';
-        delBtn.title = 'Delete Property';
-        delBtn.innerHTML = '🗑️';
-        delBtn.onclick = () => {
-          if (confirm('Are you sure?')) deletePropertyFirebase(prop.id);
-        };
-
-        editDeleteDiv.appendChild(delBtn);
-        card.appendChild(editDeleteDiv);
-      }
-
-      container.appendChild(card);
-    });
+    container.appendChild(card);
   });
 }
-
 
 function submitProperty() {
   const title = document.getElementById('propertyTitle').value.trim();
   const image = document.getElementById('propertyImage').value.trim();
   const price = document.getElementById('propertyPrice').value.trim();
   const description = document.getElementById('propertyDescription').value.trim();
-  const editIndex = document.getElementById('editIndex').value;
+  const editIndex = parseInt(document.getElementById('editIndex').value);
 
   if (!title || !image || !price || !description) {
     alert('Please fill all fields!');
     return;
   }
 
+  const props = getProperties();
   const newProperty = { title, image, price, description };
 
-  saveProperty(newProperty, editIndex || null);
-  resetForm();
-}
+  if (editIndex >= 0) {
+    props[editIndex] = newProperty;
+  } else {
+    props.push(newProperty);
+  }
 
+  saveProperties(props);
+  resetForm();
+  renderProperties();
+}
 
 function editProperty(index) {
   const props = getProperties();
