@@ -354,9 +354,10 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
-  .hero-logo {
-    width: 300px;
-    max-width: 85%;
+   .hero-logo {
+    width: 350px !important;
+    max-width: 90vw !important;
+    height: auto !important;
   }
 
   .hero h1 {
