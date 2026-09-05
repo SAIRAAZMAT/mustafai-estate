@@ -79,7 +79,8 @@ h1, h2, h3 {
 }
 
 .hero-logo {
-  width: 250px;
+  width: 350px;
+  max-width: 85%;
   margin-bottom: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 14px rgba(0,0,0,0.3);
@@ -353,9 +354,9 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
-  .services, .property-list {
-    flex-direction: column;
-    align-items: center;
+  .hero-logo {
+    width: 300px;
+    max-width: 85%;
   }
 
   .hero h1 {
@@ -365,7 +366,7 @@ footer {
   .hero p {
     font-size: 16px;
   }
-
+}
   .hero-logo {
     width: 210px;
   }
