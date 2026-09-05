@@ -78,11 +78,12 @@ h1, h2, h3 {
   padding: 20px;
 }
 
-.hero-logo {
-  width: 280px;
-  margin-bottom: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+.hero-logo { 
+  width: 330px; 
+  height: auto;
+  margin-bottom: 30px; 
+  border-radius: 10px; 
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3); 
 }
 
 .hero h1 {
@@ -366,9 +367,11 @@ footer {
     font-size: 16px;
   }
 
-  .hero-logo {
-    width: 300px;
-  }
+ .hero-logo { 
+  width: 280px; 
+  max-width: 85vw;
+  height: auto;
+}
 }
 
 
