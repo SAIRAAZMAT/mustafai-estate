@@ -79,7 +79,7 @@ h1, h2, h3 {
 }
 
 .hero-logo {
-  width: 250px;
+  width: 280px;
   margin-bottom: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 14px rgba(0,0,0,0.3);
@@ -367,7 +367,7 @@ footer {
   }
 
   .hero-logo {
-    width: 210px;
+    width: 300px;
   }
 }
 
